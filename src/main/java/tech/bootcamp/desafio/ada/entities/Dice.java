@@ -5,14 +5,16 @@ import jakarta.persistence.*;
 
 @Data
 @Entity
-@Table(name = "diceRoll")
+@Table(name = "dice_roll")
 public class Dice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "diceId", nullable = false)
+    @Column(name = "dice_id", nullable = false)
     private Long id;
 
+    @Column(name = "dice_type")
     private String diceType;
-    private int dataResult;
+    @Column(name = "dice_roll_result")
+    private int diceRollResult;
 }
