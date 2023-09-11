@@ -8,10 +8,10 @@ public class CharacterRequest {
 
     private @NotNull String type;
     private @NotNull String name;
-    private @NotNull String healthPoints;
-    private @NotNull String strength;
-    private @NotNull String defence;
-    private @NotNull String agility;
-    private @NotNull String damageDice;
-    private @NotNull String daceType;
+    private @NotNull Integer healthPoints;
+    private @NotNull Integer strength;
+    private @NotNull Integer defence;
+    private @NotNull Integer agility;
+    private @NotNull Integer damageDice;
+    private @NotNull Integer diceType;
 }

@@ -14,7 +14,7 @@ public class Dice {
     private Long id;
 
     @Column(name = "dice_type")
-    private String diceType;
+    private Integer diceType;
     @Column(name = "dice_roll_result")
-    private int diceRollResult;
+    private Integer diceRollResult;
 }

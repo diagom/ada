@@ -12,29 +12,29 @@ public class Round {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "roundId", nullable = false)
+    @Column(name = "round_id", nullable = false)
     private Long id;
 
     @OneToMany
-    @JoinColumn(name = "damage_dice_id")
+    @JoinColumn(name = "dice_roll")
     private List<Dice> diceRolls;
 
-    @JoinColumn(name = "attacker_name")
+    @Column(name = "attacker_name")
     private String attackerName;
-    @JoinColumn(name = "defender_name")
+    @Column(name = "defender_name")
     private String defenderName;
-    @JoinColumn(name = "roll_defender")
-    private String rollDefender;
-    @JoinColumn(name = "roll_attacker")
-    private String rollAttacker;
-    @JoinColumn(name = "total_rollDefender")
-    private String totalRollDefender;
-    @JoinColumn(name = "total_roll_attacker")
-    private String totalRollAttacker;
-    @JoinColumn(name = "damage_total_damage")
-    private String damageTotalDamage;
-    @JoinColumn(name = "was_attack_successful")
+    @Column(name = "roll_defender")
+    private Integer rollDefender;
+    @Column(name = "roll_attacker")
+    private Integer rollAttacker;
+    @Column(name = "total_rollDefender")
+    private Integer totalRollDefender;
+    @Column(name = "total_roll_attacker")
+    private Integer totalRollAttacker;
+    @Column(name = "damage_total_damage")
+    private Integer damageTotalDamage;
+    @Column(name = "was_attack_successful")
     private Boolean wasAttackSuccessful;
-    @JoinColumn(name = "is_round_finished")
+    @Column(name = "is_round_finished")
     private Boolean isRoundFinished;
 }

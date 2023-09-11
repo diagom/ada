@@ -13,16 +13,16 @@ public class Character {
     @Column(name = "character_id", nullable = false)
     private Long id;
 
-    @Column(name = "damage_dice", nullable = false)
-    private String DamageDice;
-    @Column(name = "dice_type", nullable = false)
-    private String diceType;
-    @Column(name = "health_points", nullable = false)
-    private String HealthPoints;
-    private String Type;
-    private String Name;
-    private String Strength;
-    private String Defence;
-    private String Agility;
+    @Column(name = "damage_dice")
+    private Integer damageDice;
+    @Column(name = "dice_type")
+    private Integer diceType;
+    @Column(name = "health_points")
+    private Integer healthPoints;
+    private Integer strength;
+    private Integer defence;
+    private Integer agility;
+    private String type;
+    private String name;
 
 }

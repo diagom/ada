@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="001_create_table_character" author="diego">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="character" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="character">
+
+            <column name="character_id" type="serial" >
+                <constraints primaryKey="true" nullable="false"  />
+            </column>
+            <column name="damage_dice" type="character varying(255)" >
+                <constraints primaryKey="true" />
+            </column>
+            <column name="dice_type" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="health_points" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="type" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="name" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="strength" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="defence" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="agility" type="character varying(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

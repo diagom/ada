@@ -3,9 +3,11 @@ package tech.bootcamp.desafio.ada.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tech.bootcamp.desafio.ada.payloads.request.CharacterRequest;
 import tech.bootcamp.desafio.ada.payloads.response.CharacterResponse;
+import tech.bootcamp.desafio.ada.services.CharacterService;
 
 @Slf4j
 @RestController
@@ -14,23 +16,28 @@ import tech.bootcamp.desafio.ada.payloads.response.CharacterResponse;
 @Tag(name = "Character", description = "controle de personagens")
 public class CharacterController {
 
+    private final CharacterService characterService;
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/", produces = "application/json" )
-    public CharacterResponse createTable(@RequestBody CharacterRequest characterRequest){
-        return new CharacterResponse();
+    public CharacterResponse createCharacter(@RequestBody CharacterRequest characterRequest){
+        return characterService.createCharacter(characterRequest);
     }
 
-    @GetMapping(path = "/{tableId}", produces = "application/json" )
-    public CharacterResponse getTable(){
-        return new CharacterResponse();
+    @GetMapping(path = "/{characterId}", produces = "application/json" )
+    public CharacterResponse getCharacterById(@PathVariable("characterId") String characterId){
+        return characterService.getCharacterById(characterId);
     }
 
-    @DeleteMapping(path = "/{tableId}", produces = "application/json" )
-    public CharacterResponse deleteTable(){
-        return new CharacterResponse();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "/{characterId}", produces = "application/json" )
+    public void deleteCharacter(@PathVariable("characterId") String characterId){
+        characterService.deleteCharacter(characterId);
     }
 
-    @PutMapping(path = "/{tableId}", produces = "application/json" )
-    public CharacterResponse rollIniciative(@RequestBody CharacterRequest characterRequest){
-        return new CharacterResponse();
+    @PutMapping(path = "/{characterId}", produces = "application/json" )
+    public CharacterResponse updateCharacter(@RequestBody CharacterRequest characterRequest,
+                                             @PathVariable("characterId") String characterId ){
+        return characterService.updateCharacter(characterRequest, characterId);
     }
 }
