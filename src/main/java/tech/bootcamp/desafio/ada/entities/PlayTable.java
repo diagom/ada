@@ -18,20 +18,15 @@ public class PlayTable {
         @OneToMany
         @JoinColumn(name = "round")
         private List<Round> roundsPlayed;
-        @OneToMany
-        @JoinColumn(name = "character")
-        private List<Character> character;
 
-        @Column(name = "player_one_name")
-        private String playerOneName;
-        @Column(name = "player_two_name")
-        private String playerTwoName;
+        @ManyToMany(fetch = FetchType.EAGER)
+        @JoinColumn(name = "player_id")
+        private List<Player> players;
+
         @Column(name = "who_is_attacking")
         private String whoIsAttacking;
+
         @Column(name = "is_against_machine")
         private boolean isAgainstMachine;
-        @Column(name = "player_one_iniciative")
-        private Integer playerOneIniciative;
-        @Column(name = "player_two_iniciative")
-        private Integer playerTwoIniciative;
+
 }

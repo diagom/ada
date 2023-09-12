@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class CreateTableRequest {
 
-    private @NotNull String playerOneCharacter;
+    private @NotNull String playerOneCharacterId;
     private @NotNull String playerOneName;
-    private String playerTwoCharacter;
+    private String playerTwoCharacterId;
     private String playerTwoName;
 }

@@ -1,6 +1,7 @@
 package tech.bootcamp.desafio.ada.payloads.response;
 
 import lombok.Data;
+import tech.bootcamp.desafio.ada.entities.Player;
 
 import java.util.List;
 
@@ -8,9 +9,7 @@ import java.util.List;
 public class TableResponse {
 
     private Long id;
-    private List<Character> character;
-    private String playerOneName;
-    private String playerTwoName;
+    private List<Player> players;
     private String whoIsAttacking;
     private boolean isAgainstMachine;
 }
