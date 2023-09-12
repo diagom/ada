@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tech.bootcamp.desafio.ada.entities.Character;
 import tech.bootcamp.desafio.ada.payloads.request.CharacterRequest;
 import tech.bootcamp.desafio.ada.payloads.response.CharacterResponse;
 import tech.bootcamp.desafio.ada.services.CharacterService;
@@ -25,7 +26,7 @@ public class CharacterController {
     }
 
     @GetMapping(path = "/{characterId}", produces = "application/json" )
-    public CharacterResponse getCharacterById(@PathVariable("characterId") String characterId){
+    public Character getCharacterById(@PathVariable("characterId") String characterId){
         return characterService.getCharacterById(characterId);
     }
 
