@@ -15,7 +15,7 @@ public class Round {
     @Column(name = "round_id", nullable = false)
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "dice_roll")
     private List<Dice> diceRolls;
 
@@ -31,8 +31,8 @@ public class Round {
     private Integer totalRollDefender;
     @Column(name = "total_roll_attacker")
     private Integer totalRollAttacker;
-    @Column(name = "damage_total_damage")
-    private Integer damageTotalDamage;
+    @Column(name = "total_damage")
+    private Integer totalDamage;
     @Column(name = "was_attack_successful")
     private Boolean wasAttackSuccessful;
     @Column(name = "is_round_finished")

@@ -9,6 +9,7 @@ import tech.bootcamp.desafio.ada.entities.Player;
 import tech.bootcamp.desafio.ada.exception.NotFoundExecption;
 import tech.bootcamp.desafio.ada.payloads.request.CreateTableRequest;
 import tech.bootcamp.desafio.ada.payloads.response.CreateTableResponse;
+import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
 import tech.bootcamp.desafio.ada.payloads.response.TableResponse;
 import tech.bootcamp.desafio.ada.repositories.PlayTableRepository;
 import tech.bootcamp.desafio.ada.services.PlayTableService;
@@ -72,6 +73,13 @@ public class PlayTableServiceImpl implements PlayTableService {
         PlayTable UpdatedTable = playTableRepository.save(playTable);
 
         return modelMapper.map(UpdatedTable, TableResponse.class);
+    }
+
+    @Override
+    public PlayTableRoundResponse updateTable(PlayTable table) {
+        PlayTable savedTable = playTableRepository.save(table);
+
+        return modelMapper.map(savedTable, PlayTableRoundResponse.class);
     }
 
     @Override

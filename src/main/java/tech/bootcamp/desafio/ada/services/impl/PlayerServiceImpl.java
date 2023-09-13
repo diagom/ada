@@ -4,8 +4,10 @@ package tech.bootcamp.desafio.ada.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tech.bootcamp.desafio.ada.entities.Character;
+import tech.bootcamp.desafio.ada.entities.PlayTable;
 import tech.bootcamp.desafio.ada.entities.Player;
 import tech.bootcamp.desafio.ada.payloads.request.CreateTableRequest;
+import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
 import tech.bootcamp.desafio.ada.repositories.PlayerRepository;
 import tech.bootcamp.desafio.ada.services.CharacterService;
 import tech.bootcamp.desafio.ada.services.PlayerService;
@@ -45,6 +47,10 @@ public class PlayerServiceImpl implements PlayerService {
         return savedPlayer;
     }
 
+    @Override
+    public Player updatePlayer(Player player) {
+        return playerRepository.save(player);
+    }
 
     @Override
     public List<Player> setPlayersIniciative(List<Player> players) {

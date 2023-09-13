@@ -27,6 +27,16 @@ public class DiceRollerUtil {
         return dice;
     }
 
+    public static int sumDiceResults(List<Dice> diceList) {
+        int sum = 0;
+
+        for (Dice dice : diceList) {
+            sum += dice.getDiceRollResult();
+        }
+
+        return sum;
+    }
+
     public static int rollDice(Integer diceType) {
         Random random = new Random();
         int result = random.nextInt(diceType) + 1;

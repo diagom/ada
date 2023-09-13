@@ -15,13 +15,16 @@ public class PlayTable {
         @Column(name = "play_table_id", nullable = false)
         private Long id;
 
-        @OneToMany
-        @JoinColumn(name = "round")
+        @ManyToMany(fetch = FetchType.EAGER)
+        @JoinColumn(name = "round" )
         private List<Round> roundsPlayed;
 
-        @ManyToMany(fetch = FetchType.EAGER)
-        @JoinColumn(name = "player_id")
+        @OneToMany(fetch = FetchType.EAGER)
+        @JoinColumn(name = "player")
         private List<Player> players;
+
+        @Column(name = "winner")
+        private String winner ;
 
         @Column(name = "who_is_attacking")
         private String whoIsAttacking;
@@ -29,4 +32,6 @@ public class PlayTable {
         @Column(name = "is_against_machine")
         private boolean isAgainstMachine;
 
+        @Column(name = "is_the_game_over")
+        private boolean isTheGameOver;
 }

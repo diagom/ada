@@ -4,9 +4,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import tech.bootcamp.desafio.ada.payloads.response.RollAttackResponse;
-import tech.bootcamp.desafio.ada.payloads.response.RollDamageResponse;
-import tech.bootcamp.desafio.ada.payloads.response.RollDefendResponse;
+import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
+import tech.bootcamp.desafio.ada.services.RoundService;
 
 @Slf4j
 @RestController
@@ -14,19 +13,20 @@ import tech.bootcamp.desafio.ada.payloads.response.RollDefendResponse;
 @RequestMapping("/round")
 @Tag(name = "Partida", description = "Rodar dados de defesa ataque e dano")
 public class RoundController {
+    private final RoundService roundService;
 
-    @PostMapping(path = "/{tableid}", produces = "application/json" )
-    public RollAttackResponse RollAttack(){
-        return new RollAttackResponse();
+    @PostMapping(path = "/{tableId}", produces = "application/json" )
+    public PlayTableRoundResponse rollAttack(@PathVariable String tableId){
+        return roundService.rollAttack(tableId);
     }
 
-    @PutMapping(path = "/{tableid}", produces = "application/json" )
-    public RollDefendResponse rollDefend(){
-        return new RollDefendResponse();
+    @PutMapping(path = "/{tableId}", produces = "application/json" )
+    public PlayTableRoundResponse rollDefend(@PathVariable String tableId){
+        return roundService.rollDefend(tableId);
     }
 
-    @PutMapping(path = "/damage", produces = "application/json" )
-    public RollDamageResponse rollDamage(){
-        return new RollDamageResponse();
+    @PutMapping(path = "/damage/{tableId}", produces = "application/json" )
+    public PlayTableRoundResponse rollDamage(@PathVariable String tableId){
+        return roundService.rollDamage(tableId);
     }
 }
