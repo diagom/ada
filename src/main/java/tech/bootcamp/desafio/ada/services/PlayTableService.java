@@ -13,7 +13,7 @@ public interface PlayTableService {
 
     CreateTableResponse createTable(CreateTableRequest createTableRequest);
     List<TableResponse> getAllTables();
-    PlayTable getTableById(String id);
+    PlayTableRoundResponse getTableById(String id);
     TableResponse rollIniciative(String id);
     PlayTableRoundResponse updateTable(PlayTable playTable);
     void deleteTable(String id);

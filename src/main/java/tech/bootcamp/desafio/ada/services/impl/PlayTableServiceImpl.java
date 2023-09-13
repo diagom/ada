@@ -51,9 +51,9 @@ public class PlayTableServiceImpl implements PlayTableService {
     }
 
     @Override
-    public PlayTable getTableById(String id) {
+    public PlayTableRoundResponse getTableById(String id) {
         PlayTable playTable = playTableRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
-        return playTable;
+        return modelMapper.map(playTable ,PlayTableRoundResponse.class);
     }
 
     @Override

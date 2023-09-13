@@ -28,7 +28,7 @@ public class RoundServiceImpl implements RoundService {
 
     @Override
     public PlayTableRoundResponse rollAttack(String tableId) {
-        PlayTable playTable = playTableService.getTableById(tableId);
+        PlayTable playTable = modelMapper.map(playTableService.getTableById(tableId), PlayTable.class);
         Dice rollAttack = DiceRollerUtil.getRolledDice(12);
         List<Round> rounds = playTable.getRoundsPlayed();
         Player attacker = getWhoIsRound(playTable, true);
@@ -54,7 +54,7 @@ public class RoundServiceImpl implements RoundService {
 
     @Override
     public PlayTableRoundResponse rollDefend(String tableId) {
-        PlayTable playTable = playTableService.getTableById(tableId);
+        PlayTable playTable = modelMapper.map(playTableService.getTableById(tableId), PlayTable.class);
         Dice rollDefend = DiceRollerUtil.getRolledDice(12);
         List<Round> rounds = playTable.getRoundsPlayed();
         Player defender = getWhoIsRound(playTable, false);
@@ -78,7 +78,7 @@ public class RoundServiceImpl implements RoundService {
 
     @Override
     public PlayTableRoundResponse rollDamage(String tableId) {
-        PlayTable playTable = playTableService.getTableById(tableId);
+        PlayTable playTable = modelMapper.map(playTableService.getTableById(tableId), PlayTable.class);
         List<Round> rounds = playTable.getRoundsPlayed();
         Round damageRound = rounds.get(rounds.size() - 1);
         Player defender = getWhoIsRound(playTable, false);
