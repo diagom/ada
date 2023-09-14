@@ -150,10 +150,12 @@
 
 <pre>
   <code>
-  datasource:
-    url: jdbc:postgresql://localhost:5433/postgres
-    username: postgres
-    password: Eraumavez1
+    environment:
+      POSTGRES_PASSWORD: Eraumavez
+      POSTGRES_USER: desafio
+      POSTGRES_DB: Ad&d
+    ports:
+      - '5433:5432'
   </code>
 </pre>
 
