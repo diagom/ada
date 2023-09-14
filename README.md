@@ -8,7 +8,7 @@
     <li>Se os PV de um personagem chegar a zero ou menos, o oponente será declarado vencedor.</li>
 </ul>
 <h3>2. Atributos dos Personagens</h3>
-<h4>Heróis</h4>
+<h4>Heróis pré-inseridos</h4>
 <table>
     <tr>
         <th>Personagem</th>
@@ -47,7 +47,7 @@
         <td>6</td>
     </tr>
 </table>
-<h4>Monstros</h4>
+<h4>Monstros pré-inseridos</h4>
 <table>
     <tr>
         <th>Personagem</th>
@@ -94,34 +94,42 @@
     <li>Para lançar múltiplos dados, use a notação "XdY". Por exemplo, "2d8" significa lançar dois dados de 8 faces e somar os resultados.</li>
 </ul>
 <h3>4. Fluxo do Jogo</h3>
-<h4>1) Iniciativa</h4>
+
+<h4>1) Criar mesa</h4>
+<ul>
+    <li>A mesa é onde sera executado a partida.</li>
+    <li>Pode ser criada varias mesas com varios herois e monstros.</li>
+</ul>
+
+<h4>2) Iniciativa</h4>
 <ul>
     <li>A iniciativa determina quem começa o turno. Isso é feito lançando um dado de 20 faces (1d20).</li>
     <li>O jogador com o maior resultado obtém a iniciativa.</li>
 </ul>
-<h4>2) Turno</h4>
+<h4>3) Turno</h4>
 <p>O turno é dividido em duas partes: Ataque e Defesa.</p>
-<h5>2.1) Ataque</h5>
+<p>Não a diferença entro turno do jogador e da maquina portanto ambos devem ser jogados iguais.</p>
+<h5>3.1) Ataque</h5>
 <ul>
     <li>O ataque é calculado somando o resultado de 1d12 com a Força e Agilidade do atacante.</li>
 </ul>
-<h5>2.2) Defesa</h5>
+<h5>3.2) Defesa</h5>
 <ul>
     <li>A defesa é calculada somando o resultado de 1d12 com a Defesa e Agilidade do defensor.</li>
     <li>Se o ataque for maior que a defesa, o dano será calculado.</li>
 </ul>
-<h4>3) Dano</h4>
+<h4>4) Dano</h4>
 <ul>
     <li>O dano é calculado com base na quantidade de dados e faces do dado do personagem.</li>
     <li>Some o valor da Força do personagem ao resultado dos dados para obter o dano.</li>
     <li>Exemplo: Bárbaro → 2d8, resultando em um valor de dano entre 2 e 16.</li>
 </ul>
-<h4>4) Pontos de Vida</h4>
+<h4>5) Pontos de Vida</h4>
 <ul>
     <li>Subtraia o valor do dano dos Pontos de Vida do personagem.</li>
     <li>O personagem com zero ou menos PV perde a luta.</li>
 </ul>
-<h4>5) Fim do Turno</h4>
+<h4>6) Fim do Turno</h4>
 <ul>
     <li>Se nenhum personagem tiver zero ou menos PV no final do turno, o jogo continua com o próximo turno.</li>
 </ul>
@@ -133,11 +141,17 @@
 <h3>6) Endpoints</h3>
 <p>Você é livre para criar os endpoints, mas esperamos pelo menos os seguintes:</p>
 <ul>
-    <li><code>/ataque</code>: Realiza um ataque.</li>
-    <li><code>/defesa</code>: Realiza uma ação de defesa.</li>
-    <li><code>/calculo-dano</code>: Calcula o dano de um ataque.</li>
-    <li>CRUD de Personagem: Implemente endpoints para criar, ler, atualizar e excluir personagens.</li>
-    <li><code>/historico</code>: Recupera o histórico de batalhas.</li>
+    <li>POST<code>/character/</code>: Realiza a criação de um novo Heroi/Monstro.</li>
+    <li>GET<code>/character/{characterId}</code>: Coleta uma lista de todos os Herois/Monstros.</li>
+    <li>PUT<code>/character/{characterId}</code>: Atualiza Um Heroi/Monstro.</li>
+    <li>POST<code>/table/</code>: Realiza a criação de uma nova Mesa de jogo.</li>
+    <li>GET<code>/table/{tableId}</code>: Coleta uma lista de todas as mesas de jogo.</li>
+    <li>PUT<code>/table/{tableId}</code>: Realiza a jogada de iniciativa para saber quem começa a atacar na mesa.</li>
+    <li>DELETE<code>/table/{tableId}</code>: Deleta Uma mesa </li>
+    <li>PUT<code>/round/{tableId}</code>: Realiza um ataque.</li>
+    <li>POST<code>/round/{tableId}</code>: Realiza uma ação de defesa.</li>
+    <li>PUT<code>/round/damage/{tableId}</code>: Calcula o dano de um ataque.</li>
+    <li>GET<code>/LOG/{tableId}</code>: Recupera o histórico de uma batalha.</li>
 </ul>
 
 <h2>Como Executar o Projeto</h2>
