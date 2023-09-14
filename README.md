@@ -141,11 +141,18 @@
 <h3>6) Endpoints</h3>
 <p>Você é livre para criar os endpoints, mas esperamos pelo menos os seguintes:</p>
 <ul>
+    <li>POST<code>/character/</code>: Realiza a criação de um novo Heroi/Monstro.</li>
+    <li>GET<code>/character/{characterId}</code>: Coleta uma lista de todos os Herois/Monstros.</li>
+    <li>PUT<code>/character/{characterId}</code>: Atualiza Um Heroi/Monstro.</li>
+    <li>DELETE<code>/character/{characterId}</code>: Deleta Um Heroi/Monstro.</li>
+    <li>POST<code>/table/</code>: Realiza a criação de uma nova Mesa de jogo.</li>
+    <li>GET<code>/table/{tableId}</code>: Coleta uma lista de todas as mesas de jogo.</li>
+    <li>PUT<code>/table/{tableId}</code>: Realiza a jogada de iniciativa para saber quem começa a atacar na mesa.</li>
+    <li>DELETE<code>/table/{tableId}</code>: Deleta Uma mesa </li>
     <li><code>/ataque</code>: Realiza um ataque.</li>
-    <li><code>/defesa</code>: Realiza uma ação de defesa.</li>
-    <li><code>/calculo-dano</code>: Calcula o dano de um ataque.</li>
-    <li>CRUD de Personagem: Implemente endpoints para criar, ler, atualizar e excluir personagens.</li>
-    <li><code>/historico</code>: Recupera o histórico de batalhas.</li>
+    <li>PUT<code>/round/{tableId}</code>: Realiza um ataque.</li>
+    <li>POST<code>/round/{tableId}</code>: Realiza uma ação de defesa.</li>
+    <li>PUT<code>/round/damage/{tableId}</code>: Calcula o dano de um ataque.</li>
 </ul>
 
 <h2>Como Executar o Projeto</h2>
