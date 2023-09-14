@@ -4,15 +4,15 @@ package tech.bootcamp.desafio.ada.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tech.bootcamp.desafio.ada.entities.Character;
-import tech.bootcamp.desafio.ada.entities.PlayTable;
 import tech.bootcamp.desafio.ada.entities.Player;
+import tech.bootcamp.desafio.ada.entities.enums.CharacterTypeEnum;
+import tech.bootcamp.desafio.ada.entities.enums.PreviusStepTextEnum;
+import tech.bootcamp.desafio.ada.exception.PreviousStepNotStartedException;
 import tech.bootcamp.desafio.ada.payloads.request.CreateTableRequest;
-import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
 import tech.bootcamp.desafio.ada.repositories.PlayerRepository;
 import tech.bootcamp.desafio.ada.services.CharacterService;
 import tech.bootcamp.desafio.ada.services.PlayerService;
 import tech.bootcamp.desafio.ada.utils.DiceRollerUtil;
-import tech.bootcamp.desafio.ada.utils.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,7 @@ public class PlayerServiceImpl implements PlayerService {
         players.add(buildPlayer(createTableRequest.getPlayerOneCharacterId(), createTableRequest.getPlayerOneName()));
 
         if(isAgainstMachine) {
+            validIfTheSecondCaracterIsAMonster(characterService.getCharacterById(createTableRequest.getPlayerTwoCharacterId()));
             players.add(buildPlayer(createTableRequest.getPlayerTwoCharacterId(), createTableRequest.getPlayerTwoName()));
         }
         else{
@@ -68,7 +69,6 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.saveAll(players);
     }
 
-
     private Player buildPlayer(String characterId, String playerName){
         Player player = new Player();
 
@@ -78,5 +78,10 @@ public class PlayerServiceImpl implements PlayerService {
         player.setCharacter(character);
 
         return player;
+    }
+
+    private void validIfTheSecondCaracterIsAMonster(Character createTableRequest){
+        if (createTableRequest.getType() != CharacterTypeEnum.Monster)
+            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Defence, PreviusStepTextEnum.Damage);
     }
 }

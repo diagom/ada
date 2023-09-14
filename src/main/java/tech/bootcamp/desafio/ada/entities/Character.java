@@ -2,6 +2,7 @@ package tech.bootcamp.desafio.ada.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import tech.bootcamp.desafio.ada.entities.enums.CharacterTypeEnum;
 
 @Data
 @Entity
@@ -19,10 +20,10 @@ public class Character {
     private Integer diceType;
     @Column(name = "health_points")
     private Integer healthPoints;
+    private CharacterTypeEnum type;
     private Integer strength;
     private Integer defence;
     private Integer agility;
-    private String type;
     private String name;
 
 }

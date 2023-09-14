@@ -1,4 +1,4 @@
-package tech.bootcamp.desafio.ada.modelMapper;
+package tech.bootcamp.desafio.ada.config.modelMapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

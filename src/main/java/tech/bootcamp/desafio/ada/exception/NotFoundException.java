@@ -1,8 +1,8 @@
 package tech.bootcamp.desafio.ada.exception;
 
-public class NotFoundExecption extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 
-    public NotFoundExecption(String id ){
+    public NotFoundException(String id ){
         super("Registro do id "+id+" não foi encontrado" );
     }
 }

@@ -6,7 +6,10 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import tech.bootcamp.desafio.ada.entities.PlayTable;
 import tech.bootcamp.desafio.ada.entities.Player;
-import tech.bootcamp.desafio.ada.exception.NotFoundExecption;
+import tech.bootcamp.desafio.ada.entities.Round;
+import tech.bootcamp.desafio.ada.entities.enums.PreviusStepTextEnum;
+import tech.bootcamp.desafio.ada.exception.NotFoundException;
+import tech.bootcamp.desafio.ada.exception.PreviousStepNotStartedException;
 import tech.bootcamp.desafio.ada.payloads.request.CreateTableRequest;
 import tech.bootcamp.desafio.ada.payloads.response.CreateTableResponse;
 import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
@@ -52,13 +55,13 @@ public class PlayTableServiceImpl implements PlayTableService {
 
     @Override
     public PlayTableRoundResponse getTableById(String id) {
-        PlayTable playTable = playTableRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
+        PlayTable playTable = playTableRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         return modelMapper.map(playTable ,PlayTableRoundResponse.class);
     }
 
     @Override
     public TableResponse rollIniciative(String id) {
-        PlayTable playTable = playTableRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
+        PlayTable playTable = playTableRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         List<Player> players = playerService.setPlayersIniciative(playTable.getPlayers());
 
         Player playerOne = players.get(0);
@@ -84,7 +87,7 @@ public class PlayTableServiceImpl implements PlayTableService {
 
     @Override
     public void deleteTable(String id) {
-        PlayTable tablePlay = playTableRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
+        PlayTable tablePlay = playTableRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         playTableRepository.delete(tablePlay);
     }
 }

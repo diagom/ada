@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import tech.bootcamp.desafio.ada.entities.Character;
-import tech.bootcamp.desafio.ada.exception.NotFoundExecption;
+import tech.bootcamp.desafio.ada.exception.NotFoundException;
 import tech.bootcamp.desafio.ada.payloads.request.CharacterRequest;
 import tech.bootcamp.desafio.ada.payloads.response.CharacterResponse;
 import tech.bootcamp.desafio.ada.payloads.response.TableResponse;
@@ -24,34 +24,28 @@ public class CharacterServiceImpl implements CharacterService {
     public CharacterResponse createCharacter(CharacterRequest characterRequest) {
         Character newCharacter = modelMapper.map(characterRequest, Character.class);
         Character savedCharacter = characterRepository.save(newCharacter);
-        CharacterResponse characterResponse = modelMapper.map(savedCharacter, CharacterResponse.class);
-
-        return characterResponse;
+        return modelMapper.map(savedCharacter, CharacterResponse.class);
     }
 
     @Override
     public CharacterResponse updateCharacter(CharacterRequest characterRequest, String characterId) {
-        characterRepository.findById(characterId).orElseThrow(() -> new NotFoundExecption(characterId));
+        characterRepository.findById(characterId).orElseThrow(() -> new NotFoundException(characterId));
         Character newCharacter = modelMapper.map(characterRequest, Character.class);
         newCharacter.setId(Long.parseLong(characterId));
         Character savedCharacter = characterRepository.save(newCharacter);
-        CharacterResponse characterResponse = modelMapper.map(savedCharacter, CharacterResponse.class);
-
-        return characterResponse;
+        return modelMapper.map(savedCharacter, CharacterResponse.class);
     }
 
     @Override
     public List<CharacterResponse> getAllCharacter() {
         List<Character> playTables = characterRepository.findAll();
-        List<CharacterResponse> tablesResponse = modelMapper.map(playTables, new TypeToken<List<TableResponse>>() {}.getType());
-        return tablesResponse;
+        return modelMapper.map(playTables, new TypeToken<List<TableResponse>>() {}.getType());
     }
 
     @Override
     public List<CharacterResponse> getAllMonsters() {
         List<Character> characters = characterRepository.findAllByType("Monster");
-        List<CharacterResponse> charactersResponse = modelMapper.map(characters, new TypeToken<List<TableResponse>>() {}.getType());
-        return charactersResponse;
+        return modelMapper.map(characters, new TypeToken<List<TableResponse>>() {}.getType());
     }
 
     @Override
@@ -61,13 +55,12 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character getCharacterById(String id) {
-        Character character = characterRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
-        return character;
+        return characterRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public void deleteCharacter(String id) {
-        Character character = characterRepository.findById(id).orElseThrow(() -> new NotFoundExecption(id));
+        Character character = characterRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         characterRepository.delete(character);
     }
 }
