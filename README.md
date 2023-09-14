@@ -152,6 +152,7 @@
     <li>PUT<code>/round/{tableId}</code>: Realiza um ataque.</li>
     <li>POST<code>/round/{tableId}</code>: Realiza uma ação de defesa.</li>
     <li>PUT<code>/round/damage/{tableId}</code>: Calcula o dano de um ataque.</li>
+    <li>GET<code>/LOG/{tableId}</code>: Recupera o histórico de uma batalha.</li>
 </ul>
 
 <h2>Como Executar o Projeto</h2>
