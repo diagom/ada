@@ -144,7 +144,6 @@
     <li>POST<code>/character/</code>: Realiza a criação de um novo Heroi/Monstro.</li>
     <li>GET<code>/character/{characterId}</code>: Coleta uma lista de todos os Herois/Monstros.</li>
     <li>PUT<code>/character/{characterId}</code>: Atualiza Um Heroi/Monstro.</li>
-    <li>DELETE<code>/character/{characterId}</code>: Deleta Um Heroi/Monstro.</li>
     <li>POST<code>/table/</code>: Realiza a criação de uma nova Mesa de jogo.</li>
     <li>GET<code>/table/{tableId}</code>: Coleta uma lista de todas as mesas de jogo.</li>
     <li>PUT<code>/table/{tableId}</code>: Realiza a jogada de iniciativa para saber quem começa a atacar na mesa.</li>
