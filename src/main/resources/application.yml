@@ -6,6 +6,7 @@ server:
     mime-types:
       - application/json
 
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -13,16 +14,16 @@ spring:
     url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: Eraumavez1
-    continue-on-error: true
+    driver-class-name: org.postgresql.Driver
 
   application:
-    name: cartoes-ms
+    name: ad&d-ms
   jpa:
     open-in-view: false
     show-sql: true
     format-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
@@ -31,3 +32,7 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changelog-local.xml
+    database-change-log-table: database-changelog
+  sql:
+    init:
+      mode: always

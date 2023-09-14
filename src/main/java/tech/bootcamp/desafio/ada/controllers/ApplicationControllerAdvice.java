@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import tech.bootcamp.desafio.ada.exception.AttackRoundException;
-import tech.bootcamp.desafio.ada.exception.NotFoundException;
-import tech.bootcamp.desafio.ada.exception.PreviousStepNotStartedException;
-import tech.bootcamp.desafio.ada.exception.SecondPlayerNotAMonsterException;
+import tech.bootcamp.desafio.ada.exception.*;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -33,6 +30,12 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(SecondPlayerNotAMonsterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String SecondPlayerNotAMonsterException(SecondPlayerNotAMonsterException ex){
+        return "Error: " + ex.getMessage();
+    }
+
+    @ExceptionHandler(RollAlreadyDoneException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String RollAlreadyDoneException(RollAlreadyDoneException ex){
         return "Error: " + ex.getMessage();
     }
 }

@@ -8,6 +8,8 @@ import tech.bootcamp.desafio.ada.entities.Player;
 import tech.bootcamp.desafio.ada.entities.enums.CharacterTypeEnum;
 import tech.bootcamp.desafio.ada.entities.enums.PreviusStepTextEnum;
 import tech.bootcamp.desafio.ada.exception.PreviousStepNotStartedException;
+import tech.bootcamp.desafio.ada.exception.RollAlreadyDoneException;
+import tech.bootcamp.desafio.ada.exception.SecondPlayerNotAMonsterException;
 import tech.bootcamp.desafio.ada.payloads.request.CreateTableRequest;
 import tech.bootcamp.desafio.ada.repositories.PlayerRepository;
 import tech.bootcamp.desafio.ada.services.CharacterService;
@@ -31,7 +33,7 @@ public class PlayerServiceImpl implements PlayerService {
         players.add(buildPlayer(createTableRequest.getPlayerOneCharacterId(), createTableRequest.getPlayerOneName()));
 
         if(isAgainstMachine) {
-            validIfTheSecondCaracterIsAMonster(characterService.getCharacterById(createTableRequest.getPlayerTwoCharacterId()));
+            validIfTheSecondCharacterIsAMonster(characterService.getCharacterById(createTableRequest.getPlayerTwoCharacterId()));
             players.add(buildPlayer(createTableRequest.getPlayerTwoCharacterId(), createTableRequest.getPlayerTwoName()));
         }
         else{
@@ -55,6 +57,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> setPlayersIniciative(List<Player> players) {
+        validIfIsInitiativeRound(players.get(0));
+
         Integer playerOneIniciative = 0;
         Integer playerTwoIniciative= 0;
 
@@ -80,8 +84,14 @@ public class PlayerServiceImpl implements PlayerService {
         return player;
     }
 
-    private void validIfTheSecondCaracterIsAMonster(Character createTableRequest){
-        if (createTableRequest.getType() != CharacterTypeEnum.Monster)
-            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Defence, PreviusStepTextEnum.Damage);
+    private void validIfTheSecondCharacterIsAMonster(Character createTableRequest){
+        if (createTableRequest.getType() != CharacterTypeEnum.Monster.getDescriptor())
+            throw new SecondPlayerNotAMonsterException();
+    }
+
+
+    private void validIfIsInitiativeRound(Player player){
+        if (player.getPlayerIniciative() != null)
+            throw new RollAlreadyDoneException();
     }
 }

@@ -2,7 +2,6 @@ package tech.bootcamp.desafio.ada.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import tech.bootcamp.desafio.ada.entities.enums.CharacterTypeEnum;
 
 @Data
 @Entity
@@ -10,7 +9,7 @@ import tech.bootcamp.desafio.ada.entities.enums.CharacterTypeEnum;
 public class Character {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id", nullable = false)
     private Long id;
 
@@ -20,7 +19,7 @@ public class Character {
     private Integer diceType;
     @Column(name = "health_points")
     private Integer healthPoints;
-    private CharacterTypeEnum type;
+    private String type;
     private Integer strength;
     private Integer defence;
     private Integer agility;

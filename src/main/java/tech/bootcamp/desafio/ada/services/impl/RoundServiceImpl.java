@@ -12,6 +12,7 @@ import tech.bootcamp.desafio.ada.entities.enums.AttackErrorTextEnum;
 import tech.bootcamp.desafio.ada.entities.enums.PreviusStepTextEnum;
 import tech.bootcamp.desafio.ada.exception.AttackRoundException;
 import tech.bootcamp.desafio.ada.exception.PreviousStepNotStartedException;
+import tech.bootcamp.desafio.ada.exception.RollAlreadyDoneException;
 import tech.bootcamp.desafio.ada.payloads.response.PlayTableRoundResponse;
 import tech.bootcamp.desafio.ada.repositories.RoundRepository;
 import tech.bootcamp.desafio.ada.services.DiceRollService;
@@ -73,7 +74,7 @@ public class RoundServiceImpl implements RoundService {
         Player defender = getWhoIsRound(playTable, false);
         Character attackerCharacter = getWhoIsRound(playTable, true).getCharacter();
         List<Dice> rollDamage = DiceRollerUtil.rollMultipleDice(attackerCharacter.getDiceType(), attackerCharacter.getDamageDice());
-        int totalRollDamage = DiceRollerUtil.sumDiceResults(rollDamage) - attackerCharacter.getStrength();
+        int totalRollDamage = DiceRollerUtil.sumDiceResults(rollDamage) + attackerCharacter.getStrength();
 
         diceRollService.saveDiceRolls(rollDamage);
         updateDamageRound(damageRound, totalRollDamage, rollDamage, defender, playTable);
@@ -127,7 +128,13 @@ public class RoundServiceImpl implements RoundService {
 
     private Round getLatestRound(PlayTable playTable) {
         List<Round> rounds = playTable.getRoundsPlayed();
-        return rounds.get(rounds.size() - 1);
+        if(rounds.size() != 0)
+            return rounds.get(rounds.size() - 1);
+        else {
+            Round newRound = new Round();
+            newRound.setIsRoundFinished(true);
+            return newRound;
+        }
     }
 
     private List<Round> updateRondsList(PlayTable playTable, Round newRound) {
@@ -155,9 +162,11 @@ public class RoundServiceImpl implements RoundService {
     }
 
     private void validIfIsAttackRound(PlayTable playTable){
+        Round lestRound = getLatestRound(playTable);
+
         if (playTable.getPlayers().get(0).getPlayerIniciative() == null)
             throw new AttackRoundException(AttackErrorTextEnum.IniciativeNotRolled);
-        else if (!getLatestRound(playTable).getIsRoundFinished())
+        else if (!lestRound.getIsRoundFinished())
             throw new AttackRoundException(AttackErrorTextEnum.RoundNotFinished);
         else if (playTable.getWinner() != null)
             throw new AttackRoundException(AttackErrorTextEnum.GameIsFinished);
@@ -165,11 +174,15 @@ public class RoundServiceImpl implements RoundService {
 
     private void validIfIsDefenderRound(Round defendRound){
         if (defendRound.getRollAttacker() == null)
-            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Attack, PreviusStepTextEnum.Defence);
+            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Defence, PreviusStepTextEnum.Attack);
+        else if (defendRound.getRollDefender() != null)
+            throw new RollAlreadyDoneException();
     }
 
     private void validIfIsDamageRound(Round defendRound){
         if (defendRound.getRollDefender() == null)
-            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Defence, PreviusStepTextEnum.Damage);
+            throw new PreviousStepNotStartedException(PreviusStepTextEnum.Damage, PreviusStepTextEnum.Defence);
+        else if (defendRound.getTotalDamage() != null)
+            throw new RollAlreadyDoneException();
     }
 }
