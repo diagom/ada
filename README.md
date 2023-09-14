@@ -149,7 +149,6 @@
     <li>GET<code>/table/{tableId}</code>: Coleta uma lista de todas as mesas de jogo.</li>
     <li>PUT<code>/table/{tableId}</code>: Realiza a jogada de iniciativa para saber quem começa a atacar na mesa.</li>
     <li>DELETE<code>/table/{tableId}</code>: Deleta Uma mesa </li>
-    <li><code>/ataque</code>: Realiza um ataque.</li>
     <li>PUT<code>/round/{tableId}</code>: Realiza um ataque.</li>
     <li>POST<code>/round/{tableId}</code>: Realiza uma ação de defesa.</li>
     <li>PUT<code>/round/damage/{tableId}</code>: Calcula o dano de um ataque.</li>
