@@ -1,5 +1,6 @@
 package tech.bootcamp.desafio.ada.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,16 +17,19 @@ public class RoundController {
     private final RoundService roundService;
 
     @PostMapping(path = "/{tableId}", produces = "application/json" )
+    @Operation(summary = "Realiza um ataque." )
     public PlayTableRoundResponse rollAttack(@PathVariable String tableId){
         return roundService.rollAttack(tableId);
     }
 
     @PutMapping(path = "/{tableId}", produces = "application/json" )
+    @Operation(summary = "Realiza uma ação de defesa." )
     public PlayTableRoundResponse rollDefend(@PathVariable String tableId){
         return roundService.rollDefend(tableId);
     }
 
     @PutMapping(path = "/damage/{tableId}", produces = "application/json" )
+    @Operation(summary = "Calcula o dano de um ataque." )
     public PlayTableRoundResponse rollDamage(@PathVariable String tableId){
         return roundService.rollDamage(tableId);
     }

@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/table")
-@Tag(name = "Mesa", description = "Criar usuario e masa onde sera gardada a sessão")
+@Tag(name = "Mesa", description = "Criar usuario e mesa onde sera guardada a sessão")
 public class TableController {
     private final PlayTableService playTableService;
 

@@ -84,8 +84,8 @@ public class PlayerServiceImpl implements PlayerService {
         return player;
     }
 
-    private void validIfTheSecondCharacterIsAMonster(Character createTableRequest){
-        if (createTableRequest.getType() != CharacterTypeEnum.Monster.getDescriptor())
+    private void validIfTheSecondCharacterIsAMonster(Character character){
+        if (character.getType().equals(CharacterTypeEnum.Monster))
             throw new SecondPlayerNotAMonsterException();
     }
 

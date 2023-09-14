@@ -1,5 +1,6 @@
 package tech.bootcamp.desafio.ada.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class LogController {
 
 
     @GetMapping(path = "/{tableId}", produces = "application/json" )
+    @Operation(summary = "Recupera o histórico de uma batalha." )
     public PlayTableRoundResponse getTable(@PathVariable String tableId){
         return playTableService.getTableById(tableId);
     }

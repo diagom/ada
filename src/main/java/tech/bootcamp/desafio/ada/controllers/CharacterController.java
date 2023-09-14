@@ -1,5 +1,6 @@
 package tech.bootcamp.desafio.ada.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,22 +22,19 @@ public class CharacterController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/", produces = "application/json" )
+    @Operation(summary = "Realiza a criação de um novo Heroi/Monstro." )
     public CharacterResponse createCharacter(@RequestBody CharacterRequest characterRequest){
         return characterService.createCharacter(characterRequest);
     }
 
     @GetMapping(path = "/{characterId}", produces = "application/json" )
+    @Operation(summary = "Coleta uma lista de todos os Herois/Monstros." )
     public Character getCharacterById(@PathVariable("characterId") String characterId){
         return characterService.getCharacterById(characterId);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path = "/{characterId}", produces = "application/json" )
-    public void deleteCharacter(@PathVariable("characterId") String characterId){
-        characterService.deleteCharacter(characterId);
-    }
-
     @PutMapping(path = "/{characterId}", produces = "application/json" )
+    @Operation(summary = "Atualiza Um Heroi/Monstro.")
     public CharacterResponse updateCharacter(@RequestBody CharacterRequest characterRequest,
                                              @PathVariable("characterId") String characterId ){
         return characterService.updateCharacter(characterRequest, characterId);
